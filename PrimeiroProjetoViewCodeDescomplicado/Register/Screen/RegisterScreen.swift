@@ -7,7 +7,17 @@
 
 import UIKit
 
+protocol RegisterScreenProtocol: AnyObject {
+    func actionBackButton()
+    func actionRegisterButton()
+}
+
 class RegisterScreen: UIView {
+    
+    weak private var delegate: RegisterScreenProtocol?
+    func delegate(delegate: RegisterScreenProtocol?){
+        self.delegate = delegate
+    }
     
     lazy var backButton: UIButton = {
         let button = UIButton()
@@ -15,7 +25,7 @@ class RegisterScreen: UIView {
         button.setImage(UIImage(named: "back"), for: .normal)
          button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
          button.setTitleColor(.white, for: .normal)
- //        button.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
+         button.addTarget(self, action: #selector(self.tappedBackButton), for: .touchUpInside)
          return button
     }()
 
@@ -23,7 +33,7 @@ class RegisterScreen: UIView {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "usuario")?.withRenderingMode(.alwaysTemplate)
-        image.tintColor = .gray
+        image.tintColor = .white
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -47,21 +57,11 @@ class RegisterScreen: UIView {
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.keyboardType = .default
-        textField.isSecureTextEntry = true
         textField.placeholder = "Digite sua Senha:"
+        textField.isSecureTextEntry = true
         textField.textColor = .darkGray
         return textField
     }()
-    
-//    lazy var registerButton: UIButton = {
-//       let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("Não tem conta? Cadastre-se!", for: .normal)
-//        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-//        button.setTitleColor(.white, for: .normal)
-////        button.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
-//        return button
-//    }()
     
     lazy var registerButton: UIButton = {
        let button = UIButton()
@@ -72,7 +72,7 @@ class RegisterScreen: UIView {
         button.clipsToBounds = true
         button.layer.cornerRadius = 7.5
         button.backgroundColor = UIColor(red: 3/255, green: 58/255, blue: 51/255, alpha: 1.0)
-//        button.addTarget(self, action: #selector(self.tappedLoginButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.tappedRegisterButton), for: .touchUpInside)
         return button
     }()
     
@@ -95,6 +95,24 @@ class RegisterScreen: UIView {
         self.backgroundColor = UIColor(red: 24/255, green: 117/255, blue: 104/255, alpha: 1.0)
     }
     
+    public func configTextFieldDelegate(delegate: UITextFieldDelegate){
+        self.emailTextField.delegate = delegate
+        self.passwordTextField.delegate = delegate
+    }
+    
+    @objc private func tappedBackButton() {
+        self.delegate?.actionBackButton()
+       
+    }
+    
+    @objc private func tappedRegisterButton() {
+        self.delegate?.actionRegisterButton()
+    }
+    
+    @objc func tappedLoginButton() {
+        print("Usuario Cadastrado")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -112,7 +130,7 @@ class RegisterScreen: UIView {
             self.backButton.topAnchor.constraint(equalTo: self.imageAddUser.topAnchor),
             self.backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             
-            self.emailTextField.topAnchor.constraint(equalTo: self.imageAddUser.bottomAnchor, constant: 20),
+            self.emailTextField.topAnchor.constraint(equalTo: self.imageAddUser.bottomAnchor, constant: 10),
             self.emailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             self.emailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             self.emailTextField.heightAnchor.constraint(equalToConstant: 45),
@@ -126,8 +144,6 @@ class RegisterScreen: UIView {
             self.registerButton.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
             self.registerButton.trailingAnchor.constraint(equalTo: self.emailTextField.trailingAnchor),
             self.registerButton.heightAnchor.constraint(equalTo: self.emailTextField.heightAnchor),
-        
-        
         ])
     }
     

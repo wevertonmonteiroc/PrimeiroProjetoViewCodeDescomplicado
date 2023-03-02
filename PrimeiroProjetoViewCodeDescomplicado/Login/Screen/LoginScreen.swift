@@ -33,7 +33,7 @@ class LoginScreen: UIView {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "logo")?.withRenderingMode(.alwaysTemplate)
-        image.tintColor = .green
+        image.tintColor = .white
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -57,8 +57,9 @@ class LoginScreen: UIView {
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.keyboardType = .default
-        textField.isSecureTextEntry = true
         textField.placeholder = "Digite sua Senha:"
+        textField.isSecureTextEntry = true
+        textField.font = UIFont.systemFont(ofSize: 14)
         textField.textColor = .darkGray
         return textField
     }()

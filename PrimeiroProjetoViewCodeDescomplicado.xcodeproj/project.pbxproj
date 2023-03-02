@@ -100,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				84EA92DF29AEC9D700B7D121 /* Screen */,
+				84EA92E029AEC9E000B7D121 /* ViewController */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -107,7 +108,6 @@
 		84EA92DF29AEC9D700B7D121 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				84EA92E029AEC9E000B7D121 /* ViewController */,
 				84EA92E529AED11300B7D121 /* RegisterScreen.swift */,
 			);
 			path = Screen;

@@ -38,6 +38,12 @@ extension LoginViewController: LoginScreenProtocol {
         self.navigationController?.pushViewController(vc, animated: true)//Responsavel por levar a tela de cadastro
     }
     
+    func actionBackButton() {
+        print("Deu certo o Back Button!!")
+//        let vc: LoginViewController = LoginViewController()
+//        self.navigationController?.pushViewController(vc, animated: true)//Responsavel por levar a tela de cadastro
+    }
+    
     
 }
 
