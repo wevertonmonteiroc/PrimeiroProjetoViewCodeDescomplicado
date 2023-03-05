@@ -80,7 +80,13 @@ class RegisterScreen: UIView {
         super.init(frame: frame)
         self.configBackGround()
         self.configSuperView()
-        self.setupConstraints()
+        //-------------------
+        self.configImageAddUserConstraints()
+        self.configBackButtonConstraints()
+        self.configEmailTextFieldConstraints()
+        self.configPasswordTextFieldConstraints()
+        self.configRegisterButtonConstraints()
+        //-------------------
     }
     
     private func configSuperView() {
@@ -140,34 +146,46 @@ class RegisterScreen: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configImageAddUserConstraints() {
+        self.imageAddUser.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
+            make.centerX.equalToSuperview()
+            make.height.width.equalTo(150)
+        }
+    }
     
-    private
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-            
-            self.imageAddUser.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
-            self.imageAddUser.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            self.imageAddUser.widthAnchor.constraint(equalToConstant: 150),
-            self.imageAddUser.heightAnchor.constraint(equalToConstant: 150),
-            
-            self.backButton.topAnchor.constraint(equalTo: self.imageAddUser.topAnchor),
-            self.backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            
-            self.emailTextField.topAnchor.constraint(equalTo: self.imageAddUser.bottomAnchor, constant: 10),
-            self.emailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            self.emailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            self.emailTextField.heightAnchor.constraint(equalToConstant: 45),
-            
-            self.passwordTextField.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 15),
-            self.passwordTextField.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
-            self.passwordTextField.trailingAnchor.constraint(equalTo: self.emailTextField.trailingAnchor),
-            self.passwordTextField.heightAnchor.constraint(equalTo: self.emailTextField.heightAnchor),
-            
-            self.registerButton.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 15),
-            self.registerButton.leadingAnchor.constraint(equalTo: self.emailTextField.leadingAnchor),
-            self.registerButton.trailingAnchor.constraint(equalTo: self.emailTextField.trailingAnchor),
-            self.registerButton.heightAnchor.constraint(equalTo: self.emailTextField.heightAnchor),
-        ])
+    func configBackButtonConstraints() {
+        self.backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.imageAddUser.snp.top)
+            make.leading.equalToSuperview().offset(20)
+        }
+    }
+    
+    func configEmailTextFieldConstraints() {
+        self.emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(self.imageAddUser.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(45)
+        }
+    }
+    
+    func configPasswordTextFieldConstraints() {
+        self.passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(self.emailTextField.snp.bottom).offset(15)
+            make.leading.equalTo(self.emailTextField)
+            make.trailing.equalTo(self.emailTextField)
+            make.height.equalTo(self.emailTextField)
+        }
+    }
+    
+    func configRegisterButtonConstraints() {
+        self.registerButton.snp.makeConstraints { make in
+            make.top.equalTo(self.passwordTextField.snp.bottom).offset(15)
+            make.leading.equalTo(self.emailTextField)
+            make.trailing.equalTo(self.emailTextField)
+            make.height.equalTo(emailTextField)
+        }
     }
     
 }
