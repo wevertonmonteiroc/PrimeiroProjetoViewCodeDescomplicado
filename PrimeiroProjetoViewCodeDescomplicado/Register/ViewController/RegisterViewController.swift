@@ -33,6 +33,10 @@ class RegisterViewController: UIViewController, RegisterScreenProtocol {
 
 extension RegisterViewController: UITextFieldDelegate {
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.registerScreen?.validateTextFields()
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

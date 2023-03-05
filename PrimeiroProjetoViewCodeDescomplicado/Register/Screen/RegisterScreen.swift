@@ -89,6 +89,7 @@ class RegisterScreen: UIView {
         self.addSubview(self.emailTextField)
         self.addSubview(self.passwordTextField)
         self.addSubview(self.registerButton)
+        self.configButtonEnable(false)
     }
     
     private func configBackGround() {
@@ -107,6 +108,28 @@ class RegisterScreen: UIView {
     
     @objc private func tappedRegisterButton() {
         self.delegate?.actionRegisterButton()
+    }
+    
+    public func validateTextFields(){
+        
+        let email: String = self.emailTextField.text ?? ""
+        let password: String = self.passwordTextField.text ?? ""
+        
+        if !email.isEmpty && !password.isEmpty {
+            self.configButtonEnable(true)
+        } else {
+            self.configButtonEnable(false)
+        }
+    }
+    
+    private func configButtonEnable(_ enable: Bool){
+        if enable {
+            self.registerButton.setTitleColor(.white, for: .normal)
+            self.registerButton.isEnabled = true
+        } else {
+            self.registerButton.setTitleColor(.lightGray, for: .normal)
+            self.registerButton.isEnabled = false
+        }
     }
     
     @objc func tappedLoginButton() {
