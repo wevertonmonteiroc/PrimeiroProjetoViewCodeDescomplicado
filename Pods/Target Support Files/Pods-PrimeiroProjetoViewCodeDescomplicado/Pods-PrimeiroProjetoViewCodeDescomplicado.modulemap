@@ -1,0 +1,6 @@
+framework module Pods_PrimeiroProjetoViewCodeDescomplicado {
+  umbrella header "Pods-PrimeiroProjetoViewCodeDescomplicado-umbrella.h"
+
+  export *
+  module * { export * }
+}
